@@ -1,0 +1,37 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: 'Apple SD Gothic Neo', 'Malgun Gothic', 'Helvetica Neue', Arial, sans-serif;
+  
+  --color-bg-natural: #FFF9F2;
+  --color-card-bg: #FFFFFF;
+  --color-primary-green: #A8E6CF;
+  --color-warning-yellow: #FFD93D;
+  --color-danger-red: #FF6B6B;
+  --color-accent-pink: #FFD3B6;
+  --color-accent-orange: #FF8B6B;
+  --color-text-main: #333333;
+  --color-text-muted: #888888;
+  --color-feedback-bg: #FFEFD5;
+  --color-feedback-border: #FFD1A4;
+  --color-feedback-text: #724E3A;
+  
+  --radius-card: 32px;
+}
+
+@layer base {
+  body {
+    @apply bg-bg-natural text-text-main antialiased;
+    font-family: var(--font-sans);
+  }
+}
+
+@layer components {
+  .card-round {
+    @apply bg-card-bg rounded-[--radius-card] shadow-[0_10px_30px_rgba(0,0,0,0.03)] border-4 border-[#FDF2E4] p-8;
+  }
+  
+  .btn-primary {
+    @apply bg-accent-orange text-white px-8 py-4 rounded-full font-extrabold text-lg transition-all active:scale-95 shadow-[0_4px_15px_rgba(255,139,107,0.3)] disabled:opacity-50;
+  }
+}
