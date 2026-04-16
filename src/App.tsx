@@ -54,7 +54,9 @@ export default function App() {
       setLastAnalysis(newRecord);
       setView("feedback");
     } catch (error) {
-      alert(error instanceof Error ? error.message : "분석 중 오류가 발생했어.");
+      console.error("Analysis Error Details:", error);
+      const errorMessage = error instanceof Error ? error.message : "분석 중 오류가 발생했어.";
+      alert(`에러 발생: ${errorMessage}\n\n자세한 내용은 브라우저 콘솔(F12)을 확인해줘.`);
     } finally {
       setIsAnalyzing(false);
     }
