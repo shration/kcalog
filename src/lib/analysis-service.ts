@@ -19,7 +19,7 @@ export async function analyzeFoodWithGemini({
   apiKey
 }: AnalysisParams) {
   if (!apiKey.startsWith("AIzaSy")) {
-    throw new Error(`유효하지 않은 API 키 형식이야. 키는 반드시 'AIzaSy'로 시작해야 해. 현재 키 앞부분: '${apiKey.substring(0, 6)}'`);
+    console.warn(`Warning: API Key does not start with 'AIzaSy'. This might be an invalid key format. Prefix: '${apiKey.substring(0, 6)}'`);
   }
 
   const ai = new GoogleGenAI({ apiKey });
