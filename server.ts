@@ -100,9 +100,10 @@ app.post("/api/analyze", async (req, res) => {
     res.json(result);
   } catch (error) {
     console.error("Gemini API Error Details:", error);
+    const errorMessage = error instanceof Error ? error.message : String(error);
     res.status(500).json({ 
-      error: "음식 분석에 실패했어.", 
-      details: error instanceof Error ? error.message : String(error) 
+      error: `음식 분석에 실패했어. (상세: ${errorMessage})`, 
+      details: errorMessage 
     });
   }
 });

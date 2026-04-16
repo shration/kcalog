@@ -89,9 +89,10 @@ export default async function handler(req: any, res: any) {
     res.status(200).json(result);
   } catch (error: any) {
     console.error("Gemini Error:", error);
+    const errorMessage = error.message || String(error);
     res.status(500).json({ 
-      error: "음식 분석에 실패했어.", 
-      details: error.message 
+      error: `음식 분석에 실패했어. (상세: ${errorMessage})`, 
+      details: errorMessage 
     });
   }
 }
