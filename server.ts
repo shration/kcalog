@@ -16,6 +16,7 @@ app.use(express.json({ limit: '10mb' }));
 
 // Gemini AI Setup
 const apiKey = process.env.GEMINI_API_KEY || process.env.GOOGLE_API_KEY || "";
+console.log("Using API Key prefix:", apiKey ? apiKey.substring(0, 6) : "NONE");
 const ai = new GoogleGenAI({ apiKey });
 
 // API Route for Food Analysis
@@ -24,10 +25,12 @@ app.post("/api/analyze", async (req, res) => {
 
   if (!apiKey) {
     console.error("Critical Error: API Key is missing in environment variables!");
+    console.log("Available Env Vars:", Object.keys(process.env));
     return res.status(500).json({ error: "서버에 API 키가 설정되지 않았어. 환경 변수(GEMINI_API_KEY 또는 GOOGLE_API_KEY)를 확인해봐." });
   }
 
-  console.log("Analysis request received. Image size:", base64Image?.length, "bytes");
+  const keyPrefix = apiKey.substring(0, 6);
+  console.log("Analysis request received. Using key prefix:", keyPrefix);
 
   const prompt = `
     이미지 속 음식을 분석해서 JSON 형식으로 반환해줘.
@@ -101,9 +104,10 @@ app.post("/api/analyze", async (req, res) => {
   } catch (error) {
     console.error("Gemini API Error Details:", error);
     const errorMessage = error instanceof Error ? error.message : String(error);
+    const keyPrefix = apiKey ? apiKey.substring(0, 6) : "NONE";
     res.status(500).json({ 
       error: `음식 분석에 실패했어. (상세: ${errorMessage})`, 
-      details: errorMessage 
+      details: `Key Prefix: ${keyPrefix}, Error: ${errorMessage}` 
     });
   }
 });

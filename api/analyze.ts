@@ -14,6 +14,7 @@ export default async function handler(req: any, res: any) {
   const apiKey = process.env.GEMINI_API_KEY || process.env.GOOGLE_API_KEY;
 
   if (!apiKey) {
+    console.error("Vercel API Key Missing. Env keys:", Object.keys(process.env));
     return res.status(500).json({ error: "API Key is missing in Vercel Environment Variables." });
   }
 
@@ -90,9 +91,10 @@ export default async function handler(req: any, res: any) {
   } catch (error: any) {
     console.error("Gemini Error:", error);
     const errorMessage = error.message || String(error);
+    const keyPrefix = apiKey ? apiKey.substring(0, 6) : "NONE";
     res.status(500).json({ 
       error: `음식 분석에 실패했어. (상세: ${errorMessage})`, 
-      details: errorMessage 
+      details: `Key Prefix: ${keyPrefix}, Error: ${errorMessage}` 
     });
   }
 }
