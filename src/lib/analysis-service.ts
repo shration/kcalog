@@ -18,6 +18,10 @@ export async function analyzeFoodWithGemini({
   currentDailyCalories,
   apiKey
 }: AnalysisParams) {
+  if (!apiKey.startsWith("AIzaSy")) {
+    throw new Error(`유효하지 않은 API 키 형식이야. 키는 반드시 'AIzaSy'로 시작해야 해. 현재 키 앞부분: '${apiKey.substring(0, 6)}'`);
+  }
+
   const ai = new GoogleGenAI({ apiKey });
   const model = "gemini-3.0-flash-preview-0514";
 

@@ -22,7 +22,9 @@ export async function analyzeFoodImage(
 
     if (!response.ok) {
       const errorData = await response.json();
-      throw new Error(errorData.error || "분석 요청에 실패했어.");
+      const message = errorData.error || "분석 요청에 실패했어.";
+      const details = errorData.details ? `\n(상세: ${errorData.details})` : "";
+      throw new Error(`${message}${details}`);
     }
 
     return await response.json();
