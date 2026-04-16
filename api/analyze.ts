@@ -1,3 +1,4 @@
+// API Handler v1.0.1 - Using Modular Analysis Service
 import { analyzeFoodWithGemini } from "../src/lib/analysis-service";
 
 export const config = {

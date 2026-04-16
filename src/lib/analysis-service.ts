@@ -1,3 +1,6 @@
+/**
+ * Analysis Service v1.0.1 - Modularized for GitHub PR
+ */
 import { GoogleGenAI, Type } from "@google/genai";
 
 export interface AnalysisParams {

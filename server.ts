@@ -1,3 +1,4 @@
+// Version: 1.0.1 - Modularized Analysis Service
 import express from "express";
 import path from "path";
 import { fileURLToPath } from "url";
