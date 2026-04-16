@@ -49,7 +49,7 @@ export default async function handler(req: any, res: any) {
 
   try {
     const response = await ai.models.generateContent({
-      model: "gemini-2.0-flash-exp",
+      model: "gemini-3.0-flash-preview-0514",
       contents: {
         parts: [
           { text: prompt },

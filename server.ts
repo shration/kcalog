@@ -61,7 +61,7 @@ app.post("/api/analyze", async (req, res) => {
 
   try {
     const response = await ai.models.generateContent({
-      model: "gemini-2.0-flash-exp",
+      model: "gemini-3.0-flash-preview-0514",
       contents: {
         parts: [
           { text: prompt },
